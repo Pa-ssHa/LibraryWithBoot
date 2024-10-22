@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск книг</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
+</head>
+<body>
+
+<h1>Поиск книг</h1>
+
+
+<form th:method="POST" th:action="@{/book/search}">
+    <div>
+        <ul class="person-list">
+            <li class="person-item">
+                <label for="title">Введите название:</label>
+                <input type="text" name="title" id="title" th:value="${title}"/>
+                <br/>
+                <br/>
+            </li>
+        </ul>
+        <div class="links">
+            <input type="submit" value="Поиск"/>
+        </div>
+    </div>
+</form>
+
+
+<ul class="person-list">
+    <li class="person-item">
+        <div th:if="${foundBooks}">
+            <span>Найденные книги:</span>
+            <div th:each="b : ${foundBooks}">
+                <a th:href="@{/book/{id}(id=${b.getId()})}"
+                   th:text="${b.title + ',  ' + b.author + ',  ' + b.year}">Book</a>
+            </div>
+        </div>
+
+        <div th:if="${foundBooksNull}">
+            <span>Книга не найдена</span>
+        </div>
+    </li>
+</ul>
+
+<br/>
+<hr/>
+<!--<a th:href="@{/book/all}">Вернуться в меню</a>-->
+<div class="links">
+    <form th:method="GET" th:action="@{/book/all}">
+        <input type="submit" value="Вернуться в меню"/>
+    </form>
+</div>
+
+</body>
+</html>

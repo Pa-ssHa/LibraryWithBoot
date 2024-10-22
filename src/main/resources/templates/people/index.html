@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все люди</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
+</head>
+<body>
+<h1>Список людей</h1>
+
+<ul class="person-list" th:each="person : ${people}">
+    <li class="person-item">
+        <a th:href="@{/people/{id}(id=${person.getId()})}"
+           th:text="${person.getName() + ', ' + person.getBirthYear()}">user</a>
+    </li>
+</ul>
+
+<div class="links">
+<!--    <a th:href="@{/people/new}">Создать человека</a>-->
+    <form th:method="GET" th:action="@{/people/new}">
+        <input type="submit" value="Создать человека"/>
+    </form>
+    <br/>
+    <br/>
+<!--    <a th:href="@{/book/all}">Перейти к книгам</a>-->
+    <form th:method="GET" th:action="@{/book/all}">
+        <input type="submit" value="Перейти к книгам"/>
+    </form>
+</div>
+
+</body>
+</html>
